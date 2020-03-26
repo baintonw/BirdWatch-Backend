@@ -1,8 +1,9 @@
+
   let birds = [];
 
   fetch("https://api.ebird.org/v2/data/obs/geo/recent/rethaw?lat=40.8547659&lng=-73.940974&maxResults=50&dist=2", {
     method: "GET",
-    headers: {"X-eBirdApiToken": //apikey}
+    headers: {"X-eBirdApiToken": apiKey}
   })
   .then(response => response.json())
   //call init map after fetching birds?
