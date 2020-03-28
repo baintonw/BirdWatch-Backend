@@ -2,12 +2,12 @@ const fetch = require('node-fetch');
 
 global.Headers = fetch.Headers;
 
-const keys = require('../config/keys.js');
+// const keys = require('../config/keys.js');
 
 
 
 var myHeaders = new Headers();
-myHeaders.append("X-eBirdApiToken", keys.eBirdKey);
+// myHeaders.append("X-eBirdApiToken", keys.eBirdKey);
 
 var requestOptions = {
   method: 'GET',
