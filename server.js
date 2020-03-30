@@ -10,6 +10,7 @@ const app = express();
 const port = 3000;
 
 
+let birds = [];
 
 //endpoint functions
 async function fetchAllLocalObs(lat, lng) {
@@ -17,7 +18,7 @@ async function fetchAllLocalObs(lat, lng) {
     await fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lng}`, requestOptions)
          .then(res=>res.json())
          .then(sightings => sightings.forEach(bird => birds.push(bird)))
-     console.log(birds, 'Here are all the birds!')
+    //  console.log(birds, 'Here are all the birds!')
      return birds
 
 }
@@ -25,11 +26,11 @@ async function fetchAllLocalObs(lat, lng) {
 app.use(cors());
 //test root route
 app.get('/', (req, res) => {
-    res.send('Welcome to the Bird Watch server!')
+    res.send([{body: 'Welcome to the Bird Watch server!'}])
 })
 
 app.get('/api/birds', (req, res) => {
-    res.send('Hey you hit the birds enpoint! Good work!')
+    res.send(['Hey you hit the birds enpoint! Good work!'])
 })
 
 app.get('/api/birds/:lat/:lng', async (req, res) => {
@@ -43,7 +44,6 @@ const requestOptions = {
     method: "GET",
     headers: {"X-eBirdApiToken": birdKey}
 }
-let birds = [];
 
 let lat = 40.8547659
 let lng = -73.940974
