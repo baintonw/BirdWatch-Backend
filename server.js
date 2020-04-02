@@ -9,12 +9,14 @@ const birdKey = process.env.EBIRD_API_KEY
 const app = express();
 const port = 3000;
 
+app.use(cors());
+
+
 
 let birds = [];
 
-//endpoint functions
+//Endpoint functions
 async function fetchAllLocalObs(lat, lng) {
-    
     await fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lng}`, requestOptions)
          .then(res=>res.json())
          .then(sightings => sightings.forEach(bird => birds.push(bird)))
@@ -23,21 +25,25 @@ async function fetchAllLocalObs(lat, lng) {
 
 }
 
-app.use(cors());
-//test root route
+//Routes
+
+//root
 app.get('/', (req, res) => {
     res.send([{body: 'Welcome to the Bird Watch server!'}])
 })
 
+//test birds route
 app.get('/api/birds', (req, res) => {
     res.send(['Hey you hit the birds enpoint! Good work!'])
 })
 
+//fetch birds at lat lng
 app.get('/api/birds/:lat/:lng', async (req, res) => {
     // res.send('latitude: ' + req.params.lat + ' ' + 'longitude: ' + req.params.lng)
     res.send(await fetchAllLocalObs(req.params.lat, req.params.lng))
 })
 
+//google api key retrieval
 app.get('/api/googlekey', (req, res) => {
     res.send({answer: 'you hit the google key endpoint!', key: process.env.GOOGLE_MAPS_API_KEY})
 })
