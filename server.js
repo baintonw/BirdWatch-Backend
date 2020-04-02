@@ -38,6 +38,10 @@ app.get('/api/birds/:lat/:lng', async (req, res) => {
     res.send(await fetchAllLocalObs(req.params.lat, req.params.lng))
 })
 
+app.get('/api/googlekey', (req, res) => {
+    res.send({answer: 'you hit the google key endpoint!', key: process.env.GOOGLE_MAPS_API_KEY})
+})
+
 
 //Fetch recent nearby observations
 const requestOptions = {
