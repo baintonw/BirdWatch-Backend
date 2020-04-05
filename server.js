@@ -14,6 +14,8 @@ app.use(cors());
 
 
 let birds = [];
+let targetBird = [];
+
 
 //Endpoint functions
 //birds at target lat lng
@@ -22,9 +24,18 @@ async function fetchAllLocalObs(lat, lng) {
          .then(res=>res.json())
          .then(sightings => sightings.forEach(bird => birds.push(bird)))
     //  console.log(birds, 'Here are all the birds!')
-     return birds
+        return birds
 
 }
+
+async function fetchLocalBird(speciesCode, lat, lng) {
+    // console.log(speciesCode)
+    await fetch(`https://api.ebird.org/v2/data/obs/geo/recent/${speciesCode}?lat=${lat}&lng=${lng}`, requestOptions)
+        .then(res=>res.json())
+        .then(bird => targetBird.push(bird))
+        return targetBird[0]
+}
+
 
 //Routes
 
@@ -44,10 +55,19 @@ app.get('/api/birds/:lat/:lng', async (req, res) => {
     res.send(await fetchAllLocalObs(req.params.lat, req.params.lng))
 })
 
+//////////////////NEEDS WORK/////////////////////
+//fetch selected bird at lat lng
+app.get('/api/birds/:speciesCode/:lat/:lng', async (req, res) => {
+    // res.send('here is the species code: ', req.params)
+    res.send(await fetchLocalBird(req.params.speciesCode, req.params.lat, req.params.lng))
+})
+
 //google api key retrieval
 app.get('/api/googlekey', (req, res) => {
     res.send({answer: 'you hit the google key endpoint!', key: process.env.GOOGLE_MAPS_API_KEY})
 })
+
+
 
 
 //Fetch recent nearby observations
