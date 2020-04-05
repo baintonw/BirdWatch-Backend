@@ -16,6 +16,7 @@ app.use(cors());
 let birds = [];
 
 //Endpoint functions
+//birds at target lat lng
 async function fetchAllLocalObs(lat, lng) {
     await fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lng}`, requestOptions)
          .then(res=>res.json())

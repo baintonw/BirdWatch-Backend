@@ -1,3 +1,4 @@
+console.log(process.env.HELLO_THERE)
 // const fetch = require('node-fetch');
 
 // global.Headers = fetch.Headers;
