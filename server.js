@@ -14,7 +14,7 @@ app.use(cors());
 
 
 let birds = [];
-let targetBird = [];
+// let targetBird = [];
 
 
 //Endpoint functions
@@ -28,12 +28,15 @@ async function fetchAllLocalObs(lat, lng) {
 
 }
 
+//I need to test this endpoint
 async function fetchLocalBird(speciesCode, lat, lng) {
     // console.log(speciesCode)
-    await fetch(`https://api.ebird.org/v2/data/obs/geo/recent/${speciesCode}?lat=${lat}&lng=${lng}`, requestOptions)
+    const targetBird = await fetch(`https://api.ebird.org/v2/data/obs/geo/recent/${speciesCode}?lat=${lat}&lng=${lng}`, requestOptions)
         .then(res=>res.json())
-        .then(bird => targetBird.push(bird))
-        return targetBird[0]
+        .then(bird => {
+            return bird
+        })
+    return targetBird
 }
 
 
