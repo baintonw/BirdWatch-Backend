@@ -58,7 +58,6 @@ app.get('/api/birds/:lat/:lng', async (req, res) => {
     res.send(await fetchAllLocalObs(req.params.lat, req.params.lng))
 })
 
-//////////////////NEEDS WORK/////////////////////
 //fetch selected bird at lat lng
 app.get('/api/birds/:speciesCode/:lat/:lng', async (req, res) => {
     // res.send('here is the species code: ', req.params)
