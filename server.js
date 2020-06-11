@@ -72,43 +72,15 @@ app.get('/api/googlekey', (req, res) => {
 
 
 
-//Fetch recent nearby observations
+//Request options for Ebird API
 const requestOptions = {
     method: "GET",
     headers: {"X-eBirdApiToken": birdKey}
 }
 
+// Unnecessary?
 let lat = 40.8547659
 let lng = -73.940974
 
-
-// fetchAllLocalObs(lat, lng);
-
-    // .then(json => console.log(json))
-
-    // console.log(fetchBirds())
-
-
-// var myHeaders = new Headers();
-// myHeaders.append("X-eBirdApiToken", process.env.eBirdKey);
-// console.log(process.env.EBIRD_API_KEY)
-
-// var requestOptions = {
-//   method: 'GET',
-//   headers: myHeaders,
-//   redirect: 'follow'
-// };
-
-// const birds = fetch("https://api.ebird.org/v2/data/obs/geo/recent?lat={{lat}}&lng={{lng}}&sort=species", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
-// fetchBirds() {
-//     fetch("https://api.ebird.org/v2/data/obs/geo/recent/rethaw?lat=40.8547659&lng=-73.940974&maxResults=50&dist=2", {
-//     method: "GET",
-//     // headers: {"X-eBirdApiToken": //APIKEY}
-//   })
-//     .then(response => response.json())
-
-
+//Server listening confirmation
 app.listen(port, () => console.log(`app is listening on port: ${port}`));
